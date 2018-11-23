@@ -1,0 +1,38 @@
+#!/bin/bash 
+
+DEV_CONF=~/kubeconfigs/dev_cluster_admin
+STAGING_CONF=~/kubeconfigs/stg_cluster_admin
+PROD_CONF=~/kubeconfigs/prod_cluster_admin
+
+change_to_dev(){
+	echo "Config changed to STAGING"
+	cp $DEV_CONF ~/.kube/config
+}
+
+change_to_staging(){
+	echo "Config changed to STAGING"
+	cp $STAGING_CONF ~/.kube/config
+}
+
+
+change_to_production(){
+	echo "Config changed to PRODUCTION"
+	cp $PROD_CONF ~/.kube/config
+}
+
+case "$1" in
+"stg")
+    change_to_staging
+    ;;
+"prod" | "PROD")
+    change_to_production
+    ;;
+"dev" | "DEV")
+    change_to_dev
+    ;;
+*)
+    echo "USAGE: arg1 stg|prod"
+    ;;
+esac
+
+
